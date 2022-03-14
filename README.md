@@ -10,8 +10,6 @@
 
 このリポジトリは、軽量な CLI テキストエディタである [nano][NANO] において、Unicode の規格における東アジア圏の各種文字のうち、いわゆる "◎" や "★" 等の記号文字及び罫線文字等、 [East_Asian_Width 特性の値が A (Ambiguous) となる文字][EAWA] (以下、 [East Asian Ambiguous Character][EAWA]) が、日本語環境で文字幅を適切に扱うことが出来ずに表示が乱れる問題を修正するための差分ファイルを適用した [nano][NANO] を起動する [AppImage パッケージファイル][APPI]を生成するための [vagrant 仮想環境][VAGR]を構築する Vagrantfile 等を含むリポジトリです。
 
-即ち、本リポジトリに含まれる Vagrantfile によって構築される仮想環境は、 "[East Asian Ambiguous Character を全角文字の幅で表示する差分ファイル][GST1]" を適用した軽量な CLI テキストエディタであるである [nano][NANO] を起動するための [AppImage パッケージファイル][APPI]を生成する為の仮想環境です。
-
 ## 使用法
 
 まず最初に、 [nano][NANO] の [AppImage パッケージファイル][APPI]を生成するための端末に [Vagrant 環境][VAGR]を構築します。 Vagrant のインストールにあたっては、以下の web ページを参考にして下さい。

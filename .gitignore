@@ -2,7 +2,7 @@ opt/formula/*
 !opt/formula/.empty
 opt/releases/*
 !opt/releases/.empty
-appimage-tmux@*.rb
+appimage-nano@*.rb
 *.AppImage
 .vagrant/*
 *.log

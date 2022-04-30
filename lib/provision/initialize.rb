@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
-  nano_versions = NanoM::stable_version_list + NanoM::devel_version_list
-  nanos = (nano_versions.map {|v| "z80oolong/eaw/nano@#{v}" }).join(" ")
+  formula_versions = Config::stable_version_list + Config::devel_version_list
+  formulae = (formula_versions.map {|v| "#{Config::formula_fullname}@#{v}" }).join(" ")
 
   config.vm.provision "shell", privileged: false, inline: %[
     if [ ! -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
@@ -14,9 +14,9 @@ Vagrant.configure("2") do |config|
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
       brew install gcc && \
       brew tap z80oolong/appimage && \
-      brew tap z80oolong/eaw && \
-      brew install --only-dependencies #{nanos} && \
-      brew install --only-dependencies --formula #{NanoM::lib_dir}/nano@#{NanoM::head_version}.rb
+      brew tap #{Config::formula_tap} && \
+      brew install --only-dependencies #{formulae} && \
+      brew install --only-dependencies --formula #{Config::lib_dir}/#{Config::formula_name}@#{Config::head_version}.rb
     fi
   ]
 end

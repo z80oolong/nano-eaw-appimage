@@ -1,38 +1,41 @@
 Vagrant.configure("2") do |config|
-  NanoM::stable_version_list.each do |v|
+  Config::stable_version_list.each do |v|
     config.vm.provision "shell", privileged: false, inline: %[
-      brew appimage-install -O -n appimage-nano@#{v} -c nano #{NanoM::release_dir}/nano-eaw-#{v}-x86_64.AppImage | \
-        sed -e 's|#desc ".*"|desc "AppImage package of Free (GNU) replacement for the Pico text editor"|g' \
-            -e 's|#homepage ".*"|homepage "https://www.nano-editor.org/"|g' \
-            -e 's|url ".*"|url "https://github.com/z80oolong/nano-eaw-appimage/releases/download/#{NanoM::appimage_version}/nano-eaw-#{v}-x86_64.AppImage"|g' \
+      brew appimage-install -O -n appimage-#{Config::formula_name}@#{v} -c #{Config::appimage_command} \
+           #{Config::release_dir}/#{Config::appimage_name}-#{v}-#{Config::appimage_arch}.AppImage | \
+        sed -e 's|#desc ".*"|desc "#{Config::formula_desc}"|g' \
+            -e 's|#homepage ".*"|homepage "#{Config::formula_homepage}"|g' \
+            -e 's|url ".*"|url "#{Config::formula_download_url}/#{Config::appimage_version}/#{Config::appimage_name}-#{v}-#{Config::appimage_arch}.AppImage"|g' \
             -e 's|version ".*"|version "#{v}"|g' \
-            -e 's|#revision 0|revision #{NanoM::appimage_revision}|g' \
-	    > #{NanoM::formula_dir}/appimage-nano@#{v}.rb
+            -e 's|#revision 0|revision #{Config::appimage_revision}|g' \
+	    > #{Config::formula_dir}/appimage-#{Config::formula_name}@#{v}.rb
     ]
   end
 
-  if NanoM::devel_version_list[0] then
-    v1dev = NanoM::devel_version
-    v2dev = NanoM::devel_version_list[0]
+  if Config::devel_version_list[0] then
+    v1dev = Config::devel_version
+    v2dev = Config::devel_version_list[0]
     config.vm.provision "shell", privileged: false, inline: %[
-      brew appimage-install -O -n appimage-nano@#{v2dev} -c nano #{NanoM::release_dir}/nano-eaw-#{v1dev}-x86_64.AppImage | \
-        sed -e 's|#desc ".*"|desc "AppImage package of Free (GNU) replacement for the Pico text editor"|g' \
-            -e 's|#homepage ".*"|homepage "https://www.nano-editor.org/"|g' \
-            -e 's|url ".*"|url "https://github.com/z80oolong/nano-eaw-appimage/releases/download/#{NanoM::appimage_version}/nano-eaw-#{v1dev}-x86_64.AppImage"|g' \
+      brew appimage-install -O -n appimage-#{Config::formula_name}@#{v2dev} -c #{Config::appimage_command} \
+           #{Config::release_dir}/#{Config::appimage_name}-#{v1dev}-#{Config::appimage_arch}.AppImage | \
+        sed -e 's|#desc ".*"|desc "#{Config::formula_desc}"|g' \
+            -e 's|#homepage ".*"|homepage "#{Config::formula_homepage}"|g' \
+            -e 's|url ".*"|url "#{Config::formula_download_url}/#{Config::appimage_version}/#{Config::appimage_name}-#{v1dev}-#{Config::appimage_arch}.AppImage"|g' \
             -e 's|version ".*"|version "#{v1dev}"|g' \
-            -e 's|#revision 0|revision #{NanoM::appimage_revision}|g' \
-            > #{NanoM::formula_dir}/appimage-nano@#{v2dev}.rb
+            -e 's|#revision 0|revision #{Config::appimage_revision}|g' \
+            > #{Config::formula_dir}/appimage-#{Config::formula_name}@#{v2dev}.rb
     ]
   end
 
-  vhead = "HEAD-#{NanoM::commit}"
+  vhead = "HEAD-#{Config::commit}"
   config.vm.provision "shell", privileged: false, inline: %[
-    brew appimage-install -O -n appimage-nano@#{NanoM::head_version} -c nano #{NanoM::release_dir}/nano-eaw-#{vhead}-x86_64.AppImage | \
-      sed -e 's|#desc ".*"|desc "AppImage package of Free (GNU) replacement for the Pico text editor"|g' \
-          -e 's|#homepage ".*"|homepage "https://www.nano-editor.org/"|g' \
-          -e 's|url ".*"|url "https://github.com/z80oolong/nano-eaw-appimage/releases/download/#{NanoM::appimage_version}/nano-eaw-#{vhead}-x86_64.AppImage"|g' \
+    brew appimage-install -O -n appimage-#{Config::formula_name}@#{Config::head_version} -c #{Config::appimage_command} \
+         #{Config::release_dir}/#{Config::appimage_name}-#{vhead}-#{Config::appimage_arch}.AppImage | \
+      sed -e 's|#desc ".*"|desc "#{Config::formula_desc}"|g' \
+          -e 's|#homepage ".*"|homepage "#{Config::formula_homepage}"|g' \
+          -e 's|url ".*"|url "#{Config::formula_download_url}/#{Config::appimage_version}/#{Config::appimage_name}-#{vhead}-#{Config::appimage_arch}.AppImage"|g' \
           -e 's|version ".*"|version "#{vhead}"|g' \
-          -e 's|#revision 0|revision #{NanoM::appimage_revision}|g' \
-          > #{NanoM::formula_dir}/appimage-nano@#{NanoM::head_version}.rb
+          -e 's|#revision 0|revision #{Config::appimage_revision}|g' \
+          > #{Config::formula_dir}/appimage-#{Config::formula_name}@#{Config::head_version}.rb
   ]
 end

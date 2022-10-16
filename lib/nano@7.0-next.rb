@@ -10,7 +10,6 @@ class NanoAT70Next < Formula
   stable do
     nano_version = "HEAD-#{Config::commit}"
     url "https://git.savannah.gnu.org/cgit/nano.git/snapshot/nano-#{Config::commit_long}.tar.gz"
-    sha256 Config::commit_sha256
     version nano_version
 
     patch :p1, Formula["z80oolong/eaw/nano"].diff_data

@@ -27,7 +27,7 @@ module Config
 
   def current_version
     if stable_version? then
-      return "5.6"
+      return "5.6.1"
     else
       return "HEAD-#{commit}"
     end
@@ -52,7 +52,7 @@ module Config
   end
 
   def commit_long
-    return "9ef854f5a9112a7d50c382dec403432dea2c3579"
+    return "e413ed8e1d8a60e44f07dd8d8080d783ce009039"
   end
 
   def commit

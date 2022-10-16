@@ -4,7 +4,6 @@ require "lib/config"
 require "lib/provision/initialize"
 require "lib/provision/reinstall"
 require "lib/provision/build_appimage"
-require "lib/provision/create_formula"
 
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2004"

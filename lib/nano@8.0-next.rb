@@ -2,7 +2,7 @@ $:.unshift((Pathname.new(__FILE__).dirname/"..").realpath.to_s)
 
 require "lib/config"
 
-class NanoAT70Next < Formula
+class NanoAT80Next < Formula
   desc "Free (GNU) replacement for the Pico text editor"
   homepage "https://www.nano-editor.org/"
   license "GPL-3.0-or-later"

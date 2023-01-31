@@ -22,12 +22,15 @@ class NanoBuilder < AppImage::Builder
     export MAGIC="${APPDIR}/usr/share/misc"
     unset ARGV0
 
-    exec "nano" "$@"
-    EOS
-  end
+    NANO="${APPDIR}/usr/bin/nano"
+    LDSO="${APPDIR}/usr/bin/ld.so"
 
-  def exclude_list
-    return ["libc.so.6"]
+    if [ -x "${LDSO}" ] ; then
+      exec "${LDSO}" "${NANO}" "$@"
+    else
+      exec "${NANO}" "$@"
+    fi
+    EOS
   end
 
   def exec_path_list

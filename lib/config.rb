@@ -2,7 +2,7 @@ module Config
   module_function
 
   def stable_version?
-    return true
+    return false
   end
 
   def current_vm_provider
@@ -62,7 +62,7 @@ module Config
   end
 
   def commit_long
-    return "1c307bc1be2906f10f7a4430f7603a3c620fb064"
+    return "ffff6649185319c6d54aa8da25966e8bdac0c303"
   end
 
   def commit
